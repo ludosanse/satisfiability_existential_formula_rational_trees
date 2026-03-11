@@ -32,7 +32,7 @@ pip install -r requirements.txt
 ```
 ## Usage
 ```Bash
-python3 main.py <input_file> [--debug]
+python3 ERTFsolver.py <input_file> [--debug]
 ```
 The `--debug` flag prints intermediate steps including processed disjuncts, and congruence closure literals.
 
