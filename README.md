@@ -22,6 +22,14 @@ Install Z3 with:
 pip install z3-solver
 ```
 
+## Installation
+
+Clone the repository and install dependencies:
+```bash
+git clone https://github.com/ludosanse/satisfiability_existential_formula_rational_trees
+cd satisfiability_existential_formula_rational_trees
+pip install -r requirements.txt
+```
 ## Usage
 ```Bash
 python3 main.py <input_file> [--debug]
