@@ -1,0 +1,18 @@
+constants a, b
+free x y
+
+--- DISJUNCT
+x = h2(z y)
+At(z)
+x != h(x,y)
+
+--- DISJUNCT
+x = y
+y != a
+
+--- DISJUNCT
+x = h2(z, y) 
+y= h1(y) 
+z = h2(x, y)
+x!= y 
+x!= z

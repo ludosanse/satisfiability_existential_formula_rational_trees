@@ -1,0 +1,8 @@
+constants a
+constructors h1/4 h2/2
+
+--- DISJUNCT
+Rooted(x,h1)
+x=h1(y,y,y,x)
+y!=x
+
