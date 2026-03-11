@@ -107,6 +107,8 @@ y = h(b)
 y != h(x)
 ```
 
+A few example files are included in the repository
+
 ## Project Structure
 
 | File | Description |
