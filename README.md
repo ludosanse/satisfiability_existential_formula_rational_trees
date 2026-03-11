@@ -85,7 +85,7 @@ Followed by one literal per line. Supported literal forms:
 | `At(x)` | atomicity predicate |
 | `Rooted(x,h)` | "x is rooted in h" |
 | `x != h(y, z)` | disequality with constructor term |
-| `x = h(a, b) with a, b constants` | constants as arguments of constructors |
+| `x = h(a, b)` | constants as arguments of constructors |
 
 the last three are internally converted to look like the other forms.
 
