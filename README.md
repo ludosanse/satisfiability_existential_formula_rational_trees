@@ -135,6 +135,5 @@ A few example files are included in the repository
     ``` 
     with `φ` a constraint in solved form, for each constructor `hi` that appears in the disjunction.
 - More verification of illogical or disallowed inputs
-- Add a rule to remove equalities where multiple bound variables are equal to the same constant, and use a single representative for those in the disjunct, substituting the rest out.
 - Major refactoring can be done to the classes defined in models.py, which would simplify file_reader.py and rewrite_rules.py significantly. Things such as a literal super class, dedicated methods for creating class instances, stuff like __eq__(), etc.
 - Create a way to extract the satisfying model once SAT has been decided.
