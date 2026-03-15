@@ -7,6 +7,11 @@ import argparse
 def main(args):
     # read and parse file
     disjuncts, var_table, constructor_table = parse_file(args.input_file)
+    if args.debugParser:
+        print('disjuncts as they are read')
+        print(repr(disjuncts))
+        print('variables in disjunct',var_table)
+        print("constructors in disjunct",constructor_table)
     # apply rewrite rules
     disjuncts,ediagrams = apply_rewrite_rules(disjuncts,var_table,args.debugRewrite)
 

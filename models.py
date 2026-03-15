@@ -4,7 +4,7 @@ class DISJUNCT:
     def __init__(self, literals=None):
         self.literals = literals if literals is not None else []
     def __repr__(self) -> str:
-        return "\n".join(repr(lit) for lit in self.literals)
+        return f"DISJUNCT(\n\t{"\n\t".join(repr(lit) for lit in self.literals)} \n)"
     def __str__(self):
         return "\n".join(str(lit) for lit in self.literals)
 
@@ -48,7 +48,7 @@ class EQUALITY:
     lhs: VAR
     rhs: VAR | CONSTRUCTOR_TERM | CONSTANT
     def __repr__(self) -> str:
-        return f"EQUALITY({self.lhs} = {self.rhs})"
+        return f"EQUALITY({repr(self.lhs)} = {repr(self.rhs)})"
     def __str__(self) -> str:
         return f"{self.lhs} = {self.rhs}"
 
