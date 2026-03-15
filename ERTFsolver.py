@@ -3,22 +3,12 @@ from rewrite_rules import apply_rewrite_rules
 from PCC import runPCC
 import argparse
 
-if __name__ == '__main__':
-    # command line machinery
-    parser = argparse.ArgumentParser(
-        description='Decision procedure for rational tree constraints'
-    )
-    parser.add_argument('input_file', nargs='?', default='test_rooted.txt', 
-                        help='path to the input file')
-    
-    parser.add_argument('--debug', action='store_true', help='print debug information')
 
-    args = parser.parse_args()
-    
+def main(args):
     # read and parse file
     disjuncts, var_table, constructor_table = parse_file(args.input_file)
     # apply rewrite rules
-    disjuncts,ediagrams = apply_rewrite_rules(disjuncts,var_table)
+    disjuncts,ediagrams = apply_rewrite_rules(disjuncts,var_table,args.debug)
 
     sat_flag = False
     if disjuncts: # if disjuncts is not empty
@@ -43,3 +33,18 @@ if __name__ == '__main__':
         print('SAT')
     else:
         print('UNSAT')
+
+if __name__ == '__main__':
+    # command line machinery
+    parser = argparse.ArgumentParser(
+        description='Decision procedure for rational tree constraints'
+    )
+    parser.add_argument('input_file', nargs='?', default='test_rooted.txt', 
+                        help='path to the input file')
+    
+    parser.add_argument('--debug', action='store_true', help='print debug information')
+
+    args = parser.parse_args()
+
+    main(args)
+    

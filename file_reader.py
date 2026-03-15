@@ -172,15 +172,15 @@ def parse_literal(line,constants,var_table: dict[str, VAR],fresh_var_counter,con
             term = CONSTANT(name = rhs)
             fresh_var = make_fresh_var(var_table,fresh_var_counter)
 
-            inequality_literal = INEQUALITY(
+            xNeqFresh_literal = INEQUALITY(
                 lhs = lhs,
                 rhs = fresh_var
                 )
-            equality_literal = EQUALITY(
+            FreshEqA_literal = EQUALITY(
                 lhs= fresh_var,
                 rhs = term,
             )
-            return inequality_literal, equality_literal
+            return xNeqFresh_literal, FreshEqA_literal
         return INEQUALITY(lhs = lhs, rhs = get_var(rhs,var_table))
 
     # Equality literals

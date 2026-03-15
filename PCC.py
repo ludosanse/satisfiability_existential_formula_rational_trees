@@ -82,9 +82,9 @@ def get_terms(obj) -> tuple[set[str],set[str],set[str]]:
     else:
         raise RuntimeError(f"unexpected object in get_terms: {obj}")
 
-def make_fresh_constant(constants, P, sort, fresh_counter):
+def make_fresh_constant(constants, P, sort, name):
     # creates a new constant and its related predicate
-    name = f"$fresh_constant_{next(fresh_counter)}"
+    name = f"new_const_{name}"
     constants.add(name)
     P[name] = z3.Function(f"P_{name}",sort,z3.BoolSort())
     return name
@@ -107,7 +107,7 @@ def setupCC(inequalities,non_inequalities,var_table,constructor_table:dict[str,i
     var = {} # variable name -> z3 constant
     for v in variables:
         var[v] = z3.Const(v,sort)
-    
+
     P = {} # constructor or constant name -> z3 predicate
     # add a predicate for each constructor and constant in the disjunct
     # a predicate in z3 is a function that maps any constant to either true of false
@@ -135,7 +135,7 @@ def setupCC(inequalities,non_inequalities,var_table,constructor_table:dict[str,i
     if debug: print("external variables --",list(external))
     # create fresh constants for each external variable
     counter = count()
-    external_constants = [make_fresh_constant(constants,P,sort,counter) for _ in external]
+    external_constants = [make_fresh_constant(constants,P,sort,name) for name in external]
     # create predicate terms for external variables
     for i,v in enumerate(external):
         constant = external_constants[i]
@@ -151,7 +151,7 @@ def setupCC(inequalities,non_inequalities,var_table,constructor_table:dict[str,i
             head = lit.lhs.name
             if isinstance(lit.rhs,CONSTANT):
                 # predicate terms
-                constant = lit.rhs
+                constant = lit.rhs.name
                 for c in P:
                     if c != constant:
                         solver.add(z3.Not(P[c](var[head])))
