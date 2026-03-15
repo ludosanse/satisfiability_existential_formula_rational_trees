@@ -1,3 +1,14 @@
 
+constants a b
+free u v
+
 --- DISJUNCT
-x!=x
+x = E(la,y)
+y = O(lb,x)
+z = O(lb,x)
+v = E(la,u)
+v = E(la,z)
+la = a
+lb = S(lb)
+%x != v
+y!= u
