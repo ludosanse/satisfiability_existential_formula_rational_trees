@@ -182,6 +182,7 @@ def rule_4(disjunct, var_table, ediagram, *args):
         return None
 
 def rule_5(disjunct,*args):
+    # Equalities among variables that include an existentially quantified variable are removed and substituted out
     new_dis = DISJUNCT()
     changed = False
     substitutions = []
@@ -255,6 +256,16 @@ def rule7(disjunct,var_table,outside_scope:EDiagram,*args):
     else:
         return None
 
+debug_info = [
+    "Remove tautologies",
+    "A variable cannot be an atom as well as be rooted in some constructor",
+    "A variable cannot be rooted by two different constructors",
+    "two equalities with the same head variable and contructor term are simplified",
+    "remove equality literals that only have free variables and add them to the e-diagram",
+    "Equalities among variables that include an existentially quantified variable are removed and substituted out",
+    "direct contradictions cause the disjunct to be UNSAT",
+    "multiple equalities including the same constant are simplfied"
+]
 
 
 def apply_rewrite_rules(all_disjuncts: list[DISJUNCT],var_table,debug = False):
@@ -264,7 +275,7 @@ def apply_rewrite_rules(all_disjuncts: list[DISJUNCT],var_table,debug = False):
     step = 0
     if debug: print("disjuncts:",len(all_disjuncts))
     for disjunct in all_disjuncts:
-        if debug: print("---DISJUNCT:",step)
+        if debug: print(f"\n---DISJUNCT: {step}\n{disjunct}\n")
         step+=1
         outside_scope = EDiagram() # store equalities that will form an e-diagram.
         changed = True
@@ -274,14 +285,14 @@ def apply_rewrite_rules(all_disjuncts: list[DISJUNCT],var_table,debug = False):
             for i,rule in enumerate([rule_0,rule_1,rule_2,rule_3,rule_4,rule_5,rule_6,rule7]):
                 result = rule(disjunct,var_table,outside_scope)
                 if result is UNSAT: # contradiction found
-                    if debug: print('UNSAT')
+                    if debug: print(f'Rule {i} : {debug_info[i]}')
                     null_disjunct_flag = True
                     break
                 elif result is not None:
-                    if debug: print('rule',i,':')
+                    if debug: print(f'Rule {i} : {debug_info[i]}')
                     if debug: print(disjunct)
                     disjunct = result
-                    if debug: print("-->becomes-->\n",disjunct,sep = '')
+                    if debug: print("-->becomes-->\n",disjunct,'\n',sep = '')
                     changed = True
                     break # start over
             if null_disjunct_flag:
