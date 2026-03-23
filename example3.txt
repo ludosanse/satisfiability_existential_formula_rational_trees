@@ -10,5 +10,5 @@ v = E(la,u)
 v = E(la,z)
 la = a
 lb = S(lb)
-%x != v
-y!= u
+
+x != v
